@@ -212,6 +212,38 @@ Now it's time to actually save those intermediate results to disk.
 
 ![Data processing pipeline in Kedro Viz](data-processing-kedro-viz.png)
 
+### Open ended: Refine your pipeline and visualize artifacts
+
+1. Register the intermediate datasets used in the data processing nodes by adding these contents to `conf/base/catalog.yml`:
+
+```yaml
+# conf/base/catalog.yml
+
+openrepair-0_3-combined:
+  type: polars.CSVDataSet
+  filepath: data/02_intermediate/openrepairdata_v0.3_combined.csv
+  load_args:
+    dtypes:
+      product_age: ${pl_Float64}
+      group_identifier: ${pl_Utf8}
+    try_parse_dates: true
+
+openrepair-0_3:
+  type: polars.CSVDataSet
+  filepath: data/03_primary/openrepairdata_v0.3_clean.csv
+  load_args:
+    dtypes:
+      product_age: ${pl_Float64}
+      group_identifier: ${pl_Utf8}
+    try_parse_dates: true
+```
+
+2. Run the pipeline by running `kedro run`. Verify that a `data/03_primary/openrepairdata_v0.3_clean.csv` file appeared on the filesystem.
+3. Create a `notebooks` directory, and move the EDA notebook there.
+4. Add a new `notebooks/data-science.ipynb` notebook and, using the `kedro.ipython` extension and the `catalog`, load the `openrepair-0_3` and extract insights from it. For example, here is a plot of the repair statuses by year:
+
+![Repair statuses by year](repair-status.png)
+
 ## Resources
 
 - Kedro documentation: https://docs.kedro.org/
