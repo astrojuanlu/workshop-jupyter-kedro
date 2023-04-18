@@ -128,6 +128,90 @@ CONFIG_LOADER_ARGS = {
 
 Success! 🎉 You created a basic Python library, which will serve as the blueprint for all the reusable code you will write. You are done with the boilerplate and are ready to start leveraging the power of Kedro.
 
+### Create a data processing pipeline
+
+1. Create a new data processing pipeline by running `kedro pipeline create data_processing`.
+2. Turn the code that joins the two `DataFrames` and cleans the result into Python functions by adding this to `src/openrepair/pipelines/data_processing/nodes.py`:
+
+```python
+# src/openrepair/pipelines/data_processing/nodes.py
+
+import polars as pl
+
+
+def join_events_categories(events: pl.DataFrame, categories: pl.DataFrame):
+    df_clean = events.select(pl.all().exclude("product_category")).join(
+        categories, on="product_category_id"
+    )
+    return df_clean
+
+
+def consolidate_barriers(df_clean: pl.DataFrame):
+    return df_clean.with_columns(
+        pl.col("repair_barrier_if_end_of_life").map_dict(
+            {"Item too worn out": "Product too worn out"},
+            default=pl.col("repair_barrier_if_end_of_life"),
+        )
+    )
+```
+
+3. Craft the pipeline by modifying `src/openrepair/pipelines/data_processing/pipeline.py` as follows:
+
+```python
+# src/openrepair/pipelines/data_processing/pipeline.py
+
+from .nodes import join_events_categories, consolidate_barriers
+
+
+def create_pipeline(**kwargs) -> Pipeline:
+    return pipeline(
+        [
+            node(
+                func=join_events_categories,
+                inputs=["openrepair-0_3-events-raw", "openrepair-0_3-categories"],
+                outputs="openrepair-0_3-combined",
+                name="join_events_categories_node",
+            ),
+            node(
+                func=consolidate_barriers,
+                inputs="openrepair-0_3-combined",
+                outputs="openrepair-0_3",
+                name="consolidate_barriers",
+            ),
+        ]
+    )
+```
+
+4. Register the pipeline by creating a `src/openrepair/pipeline_registry.py` module with these contents:
+
+```python
+# src/openrepair/pipeline_registry.py
+
+"""Project pipelines."""
+from kedro.framework.project import find_pipelines
+from kedro.pipeline import Pipeline
+
+
+def register_pipelines() -> dict[str, Pipeline]:
+    """Register the project's pipelines.
+
+    Returns:
+        A mapping from pipeline names to ``Pipeline`` objects.
+    """
+    pipelines = find_pipelines()
+    pipelines["__default__"] = sum(pipelines.values())
+    return pipelines
+```
+
+Verify that `kedro registry list` shows a `__default__` pipeline as well as the data processing one.
+
+5. Add `kedro-viz` to `requirements.txt` and install it. After that, run `kedro viz`, and wait for the web interface to open.
+
+Success! 🎉 You just created your first Kedro pipeline and now you can see it as a beautiful directed acyclic graph (DAG).
+Now it's time to actually save those intermediate results to disk.
+
+![Data processing pipeline in Kedro Viz](data-processing-kedro-viz.png)
+
 ## Resources
 
 - Kedro documentation: https://docs.kedro.org/
