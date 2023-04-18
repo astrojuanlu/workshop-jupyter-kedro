@@ -2,11 +2,8 @@ jupyterlab>=4.0
 jupyterlab-lsp>=5.0.0b1
 notebook
 python-lsp-server[all]
-polars~=0.19.0
-pyarrow
-s3fs
 seaborn
 wordcloud
 
-kedro~=0.18.13
-kedro-datasets[polars]~=1.7
+# Install library code
+-e file:.
