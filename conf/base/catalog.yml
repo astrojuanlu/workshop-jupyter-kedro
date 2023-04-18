@@ -10,3 +10,13 @@ openrepair-0_3-events-raw:
       product_age: ${pl:Float64}
       group_identifier: ${pl:Utf8}
     try_parse_dates: true
+
+openrepair-0_3-combined:
+  type: polars.GenericDataSet
+  file_format: parquet
+  filepath: data/02_intermediate/openrepairdata_v0.3_combined.pq
+
+openrepair-0_3:
+  type: polars.GenericDataSet
+  file_format: parquet
+  filepath: data/03_primary/openrepairdata_v0.3_clean.pq
