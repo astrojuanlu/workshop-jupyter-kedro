@@ -7,3 +7,6 @@ pyarrow
 s3fs
 seaborn
 wordcloud
+
+kedro~=0.18.10
+kedro-datasets[polars.CSVDataSet]~=1.3
