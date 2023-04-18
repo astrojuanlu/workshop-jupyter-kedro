@@ -1,0 +1,12 @@
+openrepair-0_3-events-raw:
+  type: polars.CSVDataSet
+  filepath: data/01_raw/OpenRepairData_v0.3_aggregate_202210.csv
+  load_args:
+    dtypes:
+      product_age: ${pl:Float64}
+      group_identifier: ${pl:Utf8}
+    try_parse_dates: true
+
+openrepair-0_3-categories:
+  type: polars.CSVDataSet
+  filepath: data/01_raw/OpenRepairData_v0.3_Product_Categories.csv
