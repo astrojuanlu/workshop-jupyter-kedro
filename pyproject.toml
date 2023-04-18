@@ -15,4 +15,4 @@ dependencies = [
 [tool.kedro]
 package_name = "openrepair"
 project_name = "openrepair"
-kedro_init_version = "0.18.8"
+kedro_init_version = "0.18.10"
