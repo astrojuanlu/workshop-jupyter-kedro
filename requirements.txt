@@ -6,3 +6,6 @@ polars~=0.17
 pyarrow
 seaborn
 wordcloud
+
+kedro @ git+https://github.com/kedro-org/kedro@3ea7231
+kedro-datasets[pandas.CSVDataSet,polars.CSVDataSet]==1.3.0
