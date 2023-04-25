@@ -1,4 +1,4 @@
-# Workshop "Analyze your data at the speed of light with Polars and Kedro"
+# Workshop "Refactor your Jupyter notebooks into maintainable data science code with Kedro"
 
 > You're a Machine Learning Engineer that has just arrived to an existing project.
 > The Data Scientist has given you a seemingly working notebook,
