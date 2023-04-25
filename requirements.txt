@@ -3,7 +3,6 @@ jupyterlab-lsp>=5.0.0b1
 notebook
 python-lsp-server[all]
 seaborn
-wordcloud
 
 # Install library code
 -e file:.

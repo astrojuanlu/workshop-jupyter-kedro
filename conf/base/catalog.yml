@@ -20,3 +20,7 @@ openrepair-0_3:
   type: polars.GenericDataSet
   file_format: parquet
   filepath: data/03_primary/openrepairdata_v0.3_clean.pq
+
+wordcloud-plot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/wordcloud.png

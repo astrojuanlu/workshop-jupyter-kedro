@@ -9,7 +9,8 @@ readme = "README.md"
 dynamic = ["version", "description"]
 dependencies = [
     "kedro~=0.18.13",
-    "kedro-datasets[polars]~=1.7",
+    "kedro-datasets[polars,matplotlib]~=1.7",
+    "wordcloud",
 ]
 
 [tool.kedro]
