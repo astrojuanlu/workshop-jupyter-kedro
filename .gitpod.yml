@@ -1,0 +1,27 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - name: Install Python project with dependencies
+    init: |
+      python -m pip install -r requirements.txt
+      pushd data \
+        && curl -O https://openrepair.org/wp-content/uploads/2023/02/OpenRepairData_v0.3_aggregate_202210.zip \
+        && unzip OpenRepairData_v0.3_aggregate_202210.zip \
+        && popd
+      gp sync-done dependencies
+
+  - name: Launch JupyterLab
+    init: |
+      gp sync-await dependencies
+    # Inspiration: https://github.com/jupyterlab/jupyterlab/blob/a920f33/.gitpod.yml
+    # and https://github.com/gitpod-io/gitpod/issues/16306
+    command: |
+      jupyter lab --port 8888 \
+        --LabApp.token='' \
+        --LabApp.allow_origin='*' \
+        --LabApp.tornado_settings='{"headers": {"Content-Security-Policy": "frame-ancestors *"}}' \
+        --no-browser
+
+ports:
+  - port: 8888
