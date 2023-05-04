@@ -7,6 +7,8 @@
 > For that, you will first verify that everything is working,
 > and then convert the notebook to a Kedro project.
 
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/astrojuanlu/workshop-jupyter-kedro/)
+
 What's the starting point?
 
 - Some data
