@@ -39,24 +39,26 @@ openrepair-0_3-events-raw:
   filepath: data/01_raw/OpenRepairData_v0.3_aggregate_202210.csv
   load_args:
     dtypes:
-      product_age: ${pl_Float64}
-      group_identifier: ${pl_Utf8}
+      product_age: ${pl:Float64}
+      group_identifier: ${pl:Utf8}
     try_parse_dates: true
 ```
 
 4. Add the following code snippet at the beginning of the notebook to use the Kedro catalog for data loading:
 
 ```python
-from kedro.config import TemplatedConfigLoader
+import polars as pl
+from kedro.config import OmegaConfigLoader
 from kedro.io import DataCatalog
 
-catalog_variables = {
-    "pl_Float64": pl.Float64,
-    "pl_Utf8": pl.Utf8,
-}
+if not OmegaConf.has_resolver("pl"):
+    OmegaConf.register_new_resolver("pl", lambda attr: getattr(pl, attr))
 
-conf_loader = TemplatedConfigLoader("conf", globals_dict=catalog_variables)
-conf_catalog = conf_loader.get("catalog.yml")
+
+# See https://github.com/kedro-org/kedro/issues/2583
+conf_loader = OmegaConfigLoader("conf", config_patterns={"catalog": ["catalog.yml", "**/catalog.yml"]})
+
+conf_catalog = conf_loader.get("catalog")
 catalog = DataCatalog.from_config(conf_catalog)
 ```
 
@@ -113,16 +115,20 @@ Verify that `kedro --help` shows a new section called "Project specific commands
 5. Add the Kedro application configuration to a new file `src/openrepair/settings.py`:
 
 ```python
-from kedro.config import TemplatedConfigLoader
-
 import polars as pl
+from kedro.config import OmegaConfigLoader
 
-CONFIG_LOADER_CLASS = TemplatedConfigLoader
+if not OmegaConf.has_resolver("pl"):
+    OmegaConf.register_new_resolver("pl", lambda attr: getattr(pl, attr))
+
+
+CONFIG_LOADER_CLASS = OmegaConfigLoader
+
+# See https://github.com/kedro-org/kedro/issues/2583
 CONFIG_LOADER_ARGS = {
-    "globals_dict": {
-        "pl_Float64": pl.Float64,
-        "pl_Utf8": pl.Utf8,
-    },
+    "config_patterns": {
+        "catalog": ["catalog.yml", "**/catalog.yml"],
+    }
 }
 ```
 
@@ -226,8 +232,8 @@ openrepair-0_3-combined:
   filepath: data/02_intermediate/openrepairdata_v0.3_combined.csv
   load_args:
     dtypes:
-      product_age: ${pl_Float64}
-      group_identifier: ${pl_Utf8}
+      product_age: ${pl:Float64}
+      group_identifier: ${pl:Utf8}
     try_parse_dates: true
 
 openrepair-0_3:
@@ -235,8 +241,8 @@ openrepair-0_3:
   filepath: data/03_primary/openrepairdata_v0.3_clean.csv
   load_args:
     dtypes:
-      product_age: ${pl_Float64}
-      group_identifier: ${pl_Utf8}
+      product_age: ${pl:Float64}
+      group_identifier: ${pl:Utf8}
     try_parse_dates: true
 ```
 
