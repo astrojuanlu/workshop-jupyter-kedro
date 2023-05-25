@@ -5,7 +5,7 @@ tasks:
   - name: Install Python project with dependencies
     init: |
       python -m pip install -r requirements.txt
-      pushd data \
+      pushd data/01_raw \
         && curl -O https://openrepair.org/wp-content/uploads/2023/02/OpenRepairData_v0.3_aggregate_202210.zip \
         && unzip OpenRepairData_v0.3_aggregate_202210.zip \
         && popd
