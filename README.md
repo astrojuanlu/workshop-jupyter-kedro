@@ -26,8 +26,8 @@ What's the starting point?
 Success! 🎉 You can now start working on the project for real. The fun starts now.
 ### Refactor data loading using the catalog
 
-1. You will need a "bleeding edge" version of `kedro` to proceed. Add `kedro @ git+https://github.com/kedro-org/kedro@3ea7231` to `requirements.txt` and install it. Verify that `kedro info` works.
-2. Add `kedro-datasets[pandas.CSVDataSet,polars.CSVDataSet]==1.3.0` to `requirements.txt`, and install it.
+1. Add `kedro~=0.18.10` to `requirements.txt` and install it. Verify that `kedro info` works.
+2. Add `kedro-datasets[pandas.CSVDataSet,polars.CSVDataSet]~=1.3` to `requirements.txt`, and install it.
 3. Create a `data/01_raw` directory, and move all the data files there.
 4. Create `conf/base` and `conf/local` directories, as well as a `conf/base/catalog.yml` file, and register the events dataset as follows:
 
@@ -107,7 +107,7 @@ __version__ = "0.1.0"
 [tool.kedro]
 package_name = "openrepair"
 project_name = "openrepair"
-kedro_init_version = "0.18.8"
+kedro_init_version = "0.18.10"
 ```
 
 Verify that `kedro --help` shows a new section called "Project specific commands from Kedro".
