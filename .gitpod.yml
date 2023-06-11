@@ -18,9 +18,8 @@ tasks:
     # and https://github.com/gitpod-io/gitpod/issues/16306
     command: |
       jupyter lab --port 8888 \
-        --LabApp.token='' \
-        --LabApp.allow_origin='*' \
-        --LabApp.tornado_settings='{"headers": {"Content-Security-Policy": "frame-ancestors *"}}' \
+        --ServerApp.token='' \
+        --ServerApp.allow_remote_access=true \
         --no-browser
 
 ports:
