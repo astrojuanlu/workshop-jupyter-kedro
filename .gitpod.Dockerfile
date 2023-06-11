@@ -5,4 +5,4 @@ RUN pyenv install 3.10.9 \
 
 RUN wget https://dl.min.io/client/mc/release/linux-amd64/mc \
     && chmod +x mc \
-    && mv mc /usr/local/bin/mc
+    && sudo mv mc /usr/local/bin/mc
