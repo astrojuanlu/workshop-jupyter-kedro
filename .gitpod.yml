@@ -3,8 +3,10 @@ image:
 
 tasks:
   - name: Install Python project with dependencies
+    # Do not use `python -m pip install` with pyenv,
+    # see https://github.com/pyenv/pyenv/issues/2243
     init: |
-      python -m pip install -r requirements.txt
+      pip install -r requirements.txt
       pushd data \
         && curl -O https://openrepair.org/wp-content/uploads/2023/02/OpenRepairData_v0.3_aggregate_202210.zip \
         && unzip OpenRepairData_v0.3_aggregate_202210.zip \
