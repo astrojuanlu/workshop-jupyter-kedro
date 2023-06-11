@@ -2,7 +2,7 @@ jupyterlab~=3.0, <3.6.0
 jupyterlab_server>=2.11.1, <2.16.0
 jupyterlab-lsp
 python-lsp-server[all]
-polars~=0.17
+polars~=0.17.0
 pyarrow
 seaborn
 wordcloud
