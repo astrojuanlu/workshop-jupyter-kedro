@@ -27,7 +27,7 @@ Success! 🎉 You can now start working on the project for real. The fun starts 
 ### Refactor data loading using the catalog
 
 1. Add `kedro~=0.18.10` to `requirements.txt` and install it. Verify that `kedro info` works.
-2. Add `kedro-datasets[pandas.CSVDataSet,polars.CSVDataSet]~=1.3` to `requirements.txt`, and install it.
+2. Add `kedro-datasets[polars.CSVDataSet]~=1.3` to `requirements.txt`, and install it.
 3. Create a `data/01_raw` directory, and move all the data files there.
 4. Create `conf/base` and `conf/local` directories, as well as a `conf/base/catalog.yml` file, and register the events dataset as follows:
 
