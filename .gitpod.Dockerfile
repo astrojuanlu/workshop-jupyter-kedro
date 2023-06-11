@@ -1,4 +1,4 @@
-FROM gitpod/workspace-python:2023-04-14-07-10-23
+FROM axonasif/workspace-python:debug2
 
 RUN pyenv install 3.10.9 \
     && pyenv global 3.10.9
