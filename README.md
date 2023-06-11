@@ -269,3 +269,22 @@ $ micromamba activate $NEV_NAME
 # Install dependencies from `requirements.txt` file using pip
 $ pip install -r requirements.txt
 ```
+
+## Extra
+
+### Using an object storage
+
+The [MinIO](https://min.io/) client and [S3FS](https://pypi.org/project/s3fs/) are pre-installed in the image.
+You can use [the MinIO play environment](https://github.com/minio/mc#test-your-setup) as follows:
+
+```bash
+$ mc alias ls play  # To see credentials
+$ mc mb play/openrepair
+$ mc cp data/OpenRepairData_v0.3_aggregate_202210.cs
+v play/openrepair
+$ export FSSPEC_S3_ENDPOINT_URL=https://play.min.io
+$ export FSSPEC_S3_KEY=...
+$ export FSSPEC_S3_SECRET=...
+$ sed -i 's;filepath: data/01_raw/OpenRepairData_v0.3_aggregate_202210.csv;filepath: s3://openrepair/OpenRepairData_v0.3_aggregate_202210.csv;g' conf/base/catalog.yml  # Replace path
+$ kedro ipython  # Test access
+```

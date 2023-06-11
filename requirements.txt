@@ -4,5 +4,6 @@ jupyterlab-lsp
 python-lsp-server[all]
 polars~=0.17.0
 pyarrow
+s3fs
 seaborn
 wordcloud
