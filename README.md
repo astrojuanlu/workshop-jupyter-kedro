@@ -280,8 +280,7 @@ You can use [the MinIO play environment](https://github.com/minio/mc#test-your-s
 ```bash
 $ mc alias ls play  # To see credentials
 $ mc mb play/openrepair
-$ mc cp data/OpenRepairData_v0.3_aggregate_202210.cs
-v play/openrepair
+$ mc cp data/OpenRepairData_v0.3_aggregate_202210.csv play/openrepair
 $ export FSSPEC_S3_ENDPOINT_URL=https://play.min.io
 $ export FSSPEC_S3_KEY=...
 $ export FSSPEC_S3_SECRET=...
