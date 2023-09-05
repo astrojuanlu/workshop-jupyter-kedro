@@ -1,6 +1,6 @@
-jupyterlab~=3.0, <3.6.0
-jupyterlab_server>=2.11.1, <2.16.0
-jupyterlab-lsp
+jupyterlab>=4.0
+jupyterlab-lsp>=5.0.0b1
+notebook
 python-lsp-server[all]
 polars~=0.17.0
 pyarrow
