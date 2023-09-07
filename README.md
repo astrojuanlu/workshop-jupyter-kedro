@@ -1,5 +1,7 @@
 # Workshop "Refactor your Jupyter notebooks into maintainable data science code with Kedro"
 
+![Powered by Kedro](https://img.shields.io/badge/powered_by-%E2%AC%A5_kedro-ffc900)
+
 > You're a Machine Learning Engineer that has just arrived to an existing project.
 > The Data Scientist has given you a seemingly working notebook,
 > and now it's your task to refactor it appropriately
