@@ -10,6 +10,7 @@
 > and then convert the notebook to a Kedro project.
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/astrojuanlu/workshop-jupyter-kedro/)
+[![Open in Codeanywhere](https://codeanywhere.com/img/open-in-codeanywhere-btn.svg)](https://app.codeanywhere.com/#https://github.com/astrojuanlu/workshop-jupyter-kedro/)
 
 What's the starting point?
 
